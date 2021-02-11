@@ -1,11 +1,13 @@
 package com.example.qnews.core
 
+import com.example.qnews.core.models.NewsRequestVO
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.create
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 private const val BASE_URL = "https://newsapi.org/v2/"
@@ -19,8 +21,13 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface NewsApiService {
-    @GET(value = "top-headlines?country=us&apiKey=1855f8b714864e30be7a1e57b5d8855b")
-    suspend fun getNewsFromNet() : NewsRequestVO
+    @GET(value = "{endpoint}")
+    suspend fun getNewsFromNet(
+        @Path(value = "endpoint") endpoint: String,
+        @Query(value = "country") country: String,
+        @Query(value = "pageSize") pageSize: Int,
+        @Query(value = "apiKey") apiKey: String
+    ): NewsRequestVO
 }
 
 object NewsApi {

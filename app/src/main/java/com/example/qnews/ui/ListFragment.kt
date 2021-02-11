@@ -1,18 +1,19 @@
 package com.example.qnews.ui
 
-import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.qnews.R
 import com.example.qnews.databinding.FragmentListBinding
+import com.example.qnews.ui.recycler.NewsAdapter
+import com.example.qnews.ui.recycler.OnNewsClickListener
 
 class ListFragment : Fragment() {
 
@@ -37,15 +38,22 @@ class ListFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-
-
+        NewsAdapter.setOnNewsClickListener(object : OnNewsClickListener {
+            override fun onNewsClick(position: Int) {
+                val id = viewModel.listOFNews.value!![position].uniqueId
+                val bundle = Bundle()
+                bundle.putInt("id", id)
+                findNavController().navigate(R.id.action_listFragment_to_detailFragment, bundle)
+            }
+        })
 
         viewModel.listOFNews.observe(viewLifecycleOwner) {
             if (it != null) {
-                Toast.makeText(requireContext(), "GOT", Toast.LENGTH_SHORT).show()
                 newsAdapter.addListOfNews(it)
             }
         }
+
+        viewModel.getAllNews()
 
         return binding.root
     }

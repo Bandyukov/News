@@ -1,4 +1,4 @@
-package com.example.qnews.core
+package com.example.qnews.core.models
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
