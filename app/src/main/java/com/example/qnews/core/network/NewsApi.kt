@@ -28,6 +28,13 @@ interface NewsApiService {
         @Query(value = "pageSize") pageSize: Int,
         @Query(value = "apiKey") apiKey: String
     ): NewsRequestVO
+
+    @GET(value = "{endpoint}")
+    suspend fun getNewsFromNetByTopic(
+        @Path(value = "endpoint") endpoint: String,
+        @Query(value = "q") q: String,
+        @Query(value = "apiKey") apiKey: String
+    ): NewsRequestVO
 }
 
 object NewsApi {

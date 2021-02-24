@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/toolbarId"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?attr/actionBarSize"-->
+<!--        app:navigationIcon="?attr/homeAsUpIndicator"/>-->
+
     <ScrollView
         android:layout_height="match_parent"
         android:layout_width="match_parent">
@@ -44,6 +50,12 @@
                 android:fontFamily="@font/antqua_italic"
                 android:textSize="18sp" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/orange"/>
+
             <TextView
                 android:id="@+id/textViewAuthor"
                 android:layout_width="wrap_content"
@@ -69,8 +81,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
                 android:fontFamily="@font/antqua_casual"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:autoLink="web"/>
 
         </LinearLayout>
     </ScrollView>
 </layout>
+

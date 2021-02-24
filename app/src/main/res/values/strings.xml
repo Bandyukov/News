@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="news_picture">news picture</string>
     <string name="source_date">%s / %s</string>
+    <string name="search_topics_and_articles">Search topics and articles</string>
+    <string name="error">unexpected error occurred</string>
 </resources>

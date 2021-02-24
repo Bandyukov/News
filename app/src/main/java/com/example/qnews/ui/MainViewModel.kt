@@ -39,12 +39,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         uiScope.launch {
             repository.getNewsFromNet()
             val result = repository.getAllNewsFromDB()
-            //Toast.makeText(context, "GOT", Toast.LENGTH_SHORT).show()
             _listOfNews_.value = result
-            result.map {
-                Log.i("res", it.title)
-            }
-
         }
 
     }
@@ -55,5 +50,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             _news_.value = thisNews
         }
     }
+
+    fun getNewsByTopic(topic: String) {
+        uiScope.launch {
+            repository.getNewsFromNetByTopic(topic)
+            val result = repository.getAllNewsFromDB()
+            _listOfNews_.value = result
+        }
+    }
+
+
 
 }

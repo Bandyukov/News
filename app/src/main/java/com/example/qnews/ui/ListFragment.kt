@@ -1,10 +1,9 @@
 package com.example.qnews.ui
 
 import android.os.Bundle
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -32,6 +31,18 @@ class ListFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
+        val bundle: Bundle? = this.arguments
+
+        bundle?.let {
+            val topic = it.getString("topic")
+            if (topic != null) {
+                if (viewModel.listOFNews.value == null)
+                    viewModel.getNewsByTopic(topic)
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.error), Toast.LENGTH_SHORT).show()
+            }
+        }
+
         val newsAdapter = NewsAdapter()
         binding.recyclerViewNews.apply {
             adapter = newsAdapter
@@ -41,9 +52,9 @@ class ListFragment : Fragment() {
         NewsAdapter.setOnNewsClickListener(object : OnNewsClickListener {
             override fun onNewsClick(position: Int) {
                 val id = viewModel.listOFNews.value!![position].uniqueId
-                val bundle = Bundle()
-                bundle.putInt("id", id)
-                findNavController().navigate(R.id.action_listFragment_to_detailFragment, bundle)
+                val bundle1 = Bundle()
+                bundle1.putInt("id", id)
+                findNavController().navigate(R.id.action_listFragment_to_detailFragment, bundle1)
             }
         })
 
@@ -53,9 +64,25 @@ class ListFragment : Fragment() {
             }
         }
 
-        viewModel.getAllNews()
+        if (viewModel.listOFNews.value == null) {
+            if (bundle == null)
+                viewModel.getAllNews()
+            Log.i("qwe", "View Model null")
+        }
+
+        setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.loop, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        findNavController().navigate(R.id.action_listFragment_to_searchFragment)
+        return super.onOptionsItemSelected(item)
     }
 
 

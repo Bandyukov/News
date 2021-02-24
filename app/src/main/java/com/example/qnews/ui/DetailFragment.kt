@@ -26,6 +26,8 @@ class DetailFragment : Fragment() {
 
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+
+
         binding.lifecycleOwner = this
 
         val bundle: Bundle? = this.arguments
@@ -47,6 +49,7 @@ class DetailFragment : Fragment() {
                 binding.textViewContent.text = it.content
                 binding.textViewUrlToSource.text = it.url
 
+                binding.executePendingBindings()
             }
         }
 
