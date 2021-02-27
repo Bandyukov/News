@@ -70,6 +70,7 @@ class SearchFragment : Fragment() {
             override fun onClick(position: Int) {
                 val topic = suggestionsHeadlines[position]
                 find(topic)
+
             }
         })
 
