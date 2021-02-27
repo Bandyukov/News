@@ -1,4 +1,4 @@
-package com.example.qnews.ui.recycler
+package com.example.qnews.ui.recycler.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,16 +11,17 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.qnews.R
 import com.example.qnews.core.models.News
+import com.example.qnews.ui.recycler.listeners.OnRecyclerClickListener
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     var listOfNews = listOf<News>()
 
     companion object {
-        private lateinit var onNewsClickListener: OnNewsClickListener
+        private lateinit var onRecyclerClickListener: OnRecyclerClickListener
 
-        fun setOnNewsClickListener(onNewsClickListener: OnNewsClickListener) {
-            this.onNewsClickListener = onNewsClickListener
+        fun setOnNewsClickListener(onRecyclerClickListener: OnRecyclerClickListener) {
+            Companion.onRecyclerClickListener = onRecyclerClickListener
         }
     }
 
@@ -48,7 +49,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
         init {
             itemView.setOnClickListener {
-                onNewsClickListener.onNewsClick(adapterPosition)
+                onRecyclerClickListener.onClick(adapterPosition)
             }
         }
 

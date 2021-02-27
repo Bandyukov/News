@@ -6,4 +6,9 @@
     <string name="source_date">%s / %s</string>
     <string name="search_topics_and_articles">Search topics and articles</string>
     <string name="error">unexpected error occurred</string>
+    <string name="loop">loop</string>
+    <string name="field_is_empty">Field is empty</string>
+    <string name="topic">topic</string>
+    <string name="headlines">Headlines</string>
+    <string name="world">World</string>
 </resources>

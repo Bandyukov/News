@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            tools:context=".ui.DetailFragment">
+            tools:context=".ui.fragments.DetailFragment">
 
             <ImageView
                 android:id="@+id/imageViewNewsPoster"
@@ -83,6 +83,37 @@
                 android:fontFamily="@font/antqua_casual"
                 android:textSize="15sp"
                 android:autoLink="web"/>
+
+            <com.github.okdroid.checkablechipview.CheckableChipView
+                android:id="@+id/chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:color="@color/red"/>
+
+
+<!--            <RelativeLayout android:layout_height="wrap_content"-->
+<!--                android:layout_width="wrap_content">-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/myImageView"-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="25dp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/myImageViewText"-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="25dp"-->
+<!--                    android:layout_alignLeft="@+id/myImageView"-->
+<!--                    android:layout_alignTop="@+id/myImageView"-->
+<!--                    android:layout_alignRight="@+id/myImageView"-->
+<!--                    android:layout_alignBottom="@+id/myImageView"-->
+<!--                    android:layout_margin="1dp"-->
+<!--                    android:gravity="center"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:text="Hello"-->
+<!--                    android:textColor="#000000" />-->
+<!--            </RelativeLayout>-->
+
 
         </LinearLayout>
     </ScrollView>

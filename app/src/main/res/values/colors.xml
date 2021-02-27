@@ -10,5 +10,6 @@
     <color name="light_gray">#EAEAEA</color>
     <color name="red">#DF0000</color>
     <color name="dark_red">#C60000</color>
+    <color name="light_red">#EF6C6C</color>
     <color name="orange">#DF6500</color>
 </resources>

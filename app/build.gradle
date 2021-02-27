@@ -94,4 +94,10 @@ dependencies {
 
     //Swipe refresh layout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipe_to_refresh_layout_version"
+
+    //Checkable chip view
+    implementation "com.github.okdroid:checkablechipview:$checkable_chip_view"
+
+    //Drawable Toolbox
+    implementation "com.github.duanhong169:drawabletoolbox:$drawable_toobox"
 }

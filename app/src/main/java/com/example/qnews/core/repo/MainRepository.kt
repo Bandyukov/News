@@ -54,5 +54,5 @@ class MainRepository(
 
     private suspend fun updateDatabase(articles: List<NewsVO>) = localSource.insertNews(articles.map { it.toNewsDB() })
 
-    suspend fun clearDatabase() = localSource.deleteAllNews()
+    private suspend fun clearDatabase() = localSource.deleteAllNews()
 }

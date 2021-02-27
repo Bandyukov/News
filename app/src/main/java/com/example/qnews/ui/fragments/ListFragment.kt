@@ -1,7 +1,6 @@
-package com.example.qnews.ui
+package com.example.qnews.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
@@ -11,8 +10,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.qnews.R
 import com.example.qnews.databinding.FragmentListBinding
-import com.example.qnews.ui.recycler.NewsAdapter
-import com.example.qnews.ui.recycler.OnNewsClickListener
+import com.example.qnews.ui.MainViewModel
+import com.example.qnews.ui.recycler.adapters.NewsAdapter
+import com.example.qnews.ui.recycler.listeners.OnRecyclerClickListener
 
 class ListFragment : Fragment() {
 
@@ -34,7 +34,7 @@ class ListFragment : Fragment() {
         val bundle: Bundle? = this.arguments
 
         bundle?.let {
-            val topic = it.getString("topic")
+            val topic = it.getString(getString(R.string.topic))
             if (topic != null) {
                 if (viewModel.listOFNews.value == null)
                     viewModel.getNewsByTopic(topic)
@@ -49,8 +49,8 @@ class ListFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-        NewsAdapter.setOnNewsClickListener(object : OnNewsClickListener {
-            override fun onNewsClick(position: Int) {
+        NewsAdapter.setOnNewsClickListener(object : OnRecyclerClickListener {
+            override fun onClick(position: Int) {
                 val id = viewModel.listOFNews.value!![position].uniqueId
                 val bundle1 = Bundle()
                 bundle1.putInt("id", id)
@@ -67,7 +67,6 @@ class ListFragment : Fragment() {
         if (viewModel.listOFNews.value == null) {
             if (bundle == null)
                 viewModel.getAllNews()
-            Log.i("qwe", "View Model null")
         }
 
         setHasOptionsMenu(true)
