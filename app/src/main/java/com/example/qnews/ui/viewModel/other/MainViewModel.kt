@@ -1,4 +1,4 @@
-package com.example.qnews.ui
+package com.example.qnews.ui.viewModel.other
 
 import android.app.Application
 import android.util.Log

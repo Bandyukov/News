@@ -4,6 +4,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.qnews.core.db.entities.NewsDB
+import com.example.qnews.core.db.entities.SearchDB
 
 @Dao
 interface NewsDAO {
@@ -18,4 +20,15 @@ interface NewsDAO {
 
     @Query("DELETE FROM the_news_table")
     suspend fun deleteAllNews()
+
+
+
+    @Query("SELECT * FROM recent_search_table ORDER BY -`key`")
+    suspend fun getAllRecentSearch() : List<SearchDB>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSearch(searchDB: SearchDB)
+
+    @Query("DELETE FROM recent_search_table")
+    suspend fun deleteAllRecentSearch()
 }

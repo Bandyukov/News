@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.qnews.R
 import com.example.qnews.databinding.FragmentListBinding
-import com.example.qnews.ui.MainViewModel
+import com.example.qnews.ui.viewModel.other.MainViewModel
 import com.example.qnews.ui.recycler.adapters.NewsAdapter
 import com.example.qnews.ui.recycler.listeners.OnRecyclerClickListener
 

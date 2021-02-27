@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.qnews.R
 import com.example.qnews.databinding.FragmentDetailBinding
-import com.example.qnews.ui.MainViewModel
+import com.example.qnews.ui.viewModel.other.MainViewModel
 import top.defaults.drawabletoolbox.DrawableBuilder
 
 class DetailFragment : Fragment() {

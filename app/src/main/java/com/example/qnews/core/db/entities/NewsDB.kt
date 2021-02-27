@@ -1,4 +1,4 @@
-package com.example.qnews.core.db
+package com.example.qnews.core.db.entities
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

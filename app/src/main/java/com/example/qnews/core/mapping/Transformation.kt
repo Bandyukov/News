@@ -1,7 +1,8 @@
 package com.example.qnews.core.mapping
 
 import com.example.qnews.core.models.News
-import com.example.qnews.core.db.NewsDB
+import com.example.qnews.core.db.entities.NewsDB
+import com.example.qnews.core.db.entities.SearchDB
 import com.example.qnews.core.models.NewsVO
 
 
