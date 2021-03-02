@@ -2,12 +2,11 @@ package com.example.qnews.ui.viewModel.other
 
 import android.app.Application
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.qnews.core.repo.MainRepository
-import com.example.qnews.core.models.News
+import com.example.qnews.core.models.news.News
 import com.example.qnews.core.NewsApi
 import com.example.qnews.core.db.NewsDatabase
 import kotlinx.coroutines.CoroutineScope
@@ -40,6 +39,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             repository.getNewsFromNet()
             val result = repository.getAllNewsFromDB()
             _listOfNews_.value = result
+
+            if (listOFNews.value != null)
+                Log.i("asd", "we get respond and set to view model. size is ${listOFNews.value!!.size}")
+            else
+                Log.i("asd", "NUll")
         }
 
     }
@@ -59,6 +63,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-
+    fun getDB() {
+        uiScope.launch {
+            _listOfNews_.value = repository.getAllNewsFromDB()
+            if (listOFNews.value != null)
+                Log.i("asd", "we get respond and set to view model. size is ${listOFNews.value!!.size}!!!!!")
+            else
+                Log.i("asd", "NUll")
+        }
+    }
 
 }

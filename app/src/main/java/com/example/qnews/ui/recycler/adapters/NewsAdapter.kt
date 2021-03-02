@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.qnews.R
-import com.example.qnews.core.models.News
+import com.example.qnews.core.models.news.News
 import com.example.qnews.ui.recycler.listeners.OnRecyclerClickListener
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {

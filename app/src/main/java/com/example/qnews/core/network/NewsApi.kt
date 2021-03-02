@@ -1,6 +1,6 @@
 package com.example.qnews.core
 
-import com.example.qnews.core.models.NewsRequestVO
+import com.example.qnews.core.models.news.NewsRequestVO
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit

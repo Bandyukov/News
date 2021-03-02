@@ -1,13 +1,12 @@
 package com.example.qnews.core.repo
 
-import android.util.Log
-import com.example.qnews.core.models.News
+import com.example.qnews.core.models.news.News
 import com.example.qnews.core.NewsApiService
-import com.example.qnews.core.models.NewsVO
+import com.example.qnews.core.models.news.NewsVO
 import com.example.qnews.core.db.NewsDAO
 import com.example.qnews.core.mapping.toNews
 import com.example.qnews.core.mapping.toNewsDB
-import com.example.qnews.core.models.NewsRequestVO
+import com.example.qnews.core.models.news.NewsRequestVO
 import java.lang.Exception
 
 class MainRepository(
