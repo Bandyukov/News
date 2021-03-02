@@ -1,7 +1,6 @@
 package com.example.qnews.core.models
 
 import android.os.Parcelable
-import com.example.qnews.core.Source
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 

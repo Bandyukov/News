@@ -95,6 +95,11 @@ dependencies {
     //Swipe refresh layout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipe_to_refresh_layout_version"
 
+    // Delegate adapter
+    implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:$adapterDelegates"
+    implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$adapterDelegates"
+
+
     //Checkable chip view
     implementation "com.github.okdroid:checkablechipview:$checkable_chip_view"
 

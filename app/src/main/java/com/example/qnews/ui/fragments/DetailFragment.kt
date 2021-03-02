@@ -37,20 +37,37 @@ class DetailFragment : Fragment() {
             viewModel.getNews(id)
 
             viewModel.news.observe(viewLifecycleOwner) {
-                Glide.with(binding.imageViewNewsPoster.context).load(it.urlToImage).into(binding.imageViewNewsPoster)
-                binding.textViewNewsTitle.text = it.title
-                binding.textViewDescription.text = it.description
-                binding.textViewSourceAndDate.text = String.format(
-                    getString(R.string.source_date),
-                    it.name,
-                    it.publishedAt
-                )
-                binding.textViewAuthor.text = it.author
-                binding.textViewContent.text = it.content
-                binding.textViewUrlToSource.text = it.url
+                with(binding) {
+                    Glide.with(imageViewNewsPoster.context).load(it.urlToImage).into(imageViewNewsPoster)
+                    textViewNewsTitle.text = it.title
+                    textViewDescription.text = it.description
+                    textViewSourceAndDate.text = String.format(
+                        getString(R.string.source_date),
+                        it.name,
+                        it.publishedAt
+                    )
+                    textViewAuthor.text = it.author
+                    textViewContent.text = it.content
+                    textViewUrlToSource.text = it.url
 
-                val ch: CharSequence = it.author as CharSequence
-                binding.chip.text = ch
+                    val ch: CharSequence = it.author as CharSequence
+                    chip.text = ch
+                }
+
+//                Glide.with(binding.imageViewNewsPoster.context).load(it.urlToImage).into(binding.imageViewNewsPoster)
+//                binding.textViewNewsTitle.text = it.title
+//                binding.textViewDescription.text = it.description
+//                binding.textViewSourceAndDate.text = String.format(
+//                    getString(R.string.source_date),
+//                    it.name,
+//                    it.publishedAt
+//                )
+//                binding.textViewAuthor.text = it.author
+//                binding.textViewContent.text = it.content
+//                binding.textViewUrlToSource.text = it.url
+//
+//                val ch: CharSequence = it.author as CharSequence
+//                binding.chip.text = ch
 
                 val a = DrawableBuilder()
                     .rectangle()
