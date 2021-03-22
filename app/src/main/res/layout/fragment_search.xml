@@ -4,119 +4,108 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="mainViewModel"
-            type="com.example.qnews.ui.viewModel.other.MainViewModel" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout 
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.fragments.SearchFragment">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/editTextSearch"
-            android:layout_width="0dp"
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:fontFamily="@font/antqua_bold"
-            android:hint="@string/search_topics_and_articles"
-            android:lines="1"
-            app:layout_constraintEnd_toStartOf="@id/imageViewLoop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:fitsSystemWindows="true"
+            android:elevation="0dp"
+            >
 
-        <ImageView
-            android:id="@+id/imageViewLoop"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@android:drawable/ic_menu_search"
-            app:layout_constraintBottom_toBottomOf="@id/editTextSearch"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="@string/loop"
-            app:layout_constraintStart_toEndOf="@id/editTextSearch"
-            app:layout_constraintTop_toTopOf="@id/editTextSearch" />
+            <com.example.qnews.ui.toolbar.Toolbar2
+                android:id="@+id/toolbar2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/headlinesTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/headlines"
-            android:fontFamily="@font/antqua_bold"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="4dp"
-            app:layout_constraintTop_toBottomOf="@id/imageViewLoop"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+        </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/suggestionsHeadlinesRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            app:layout_constraintTop_toBottomOf="@id/headlinesTextView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.fragments.SearchFragment">
 
-        <TextView
-            android:id="@+id/worldTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/world"
-            android:fontFamily="@font/antqua_bold"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="4dp"
-            app:layout_constraintTop_toBottomOf="@id/suggestionsHeadlinesRecyclerView"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            <TextView
+                android:id="@+id/headlinesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/antqua_bold"
+                android:text="@string/headlines"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/suggestionsWorldRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            app:layout_constraintTop_toBottomOf="@id/worldTextView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/suggestionsHeadlinesRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/headlinesTextView" />
 
-        <TextView
-            android:id="@+id/recentSearchesTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/recent_searches"
-            android:fontFamily="@font/antqua_bold"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="4dp"
-            app:layout_constraintTop_toBottomOf="@id/suggestionsWorldRecyclerView"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            <TextView
+                android:id="@+id/worldTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/antqua_bold"
+                android:text="@string/world"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/suggestionsHeadlinesRecyclerView" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recentSearchesRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            app:layout_constraintTop_toBottomOf="@id/recentSearchesTextView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/suggestionsWorldRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/worldTextView" />
 
-        <Button
-            android:id="@+id/clearButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/recentSearchesRecyclerView"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="clear"
-            android:fontFamily="@font/antqua_bold"
-            android:visibility="invisible"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/recentSearchesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/antqua_bold"
+                android:text="@string/recent_searches"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/suggestionsWorldRecyclerView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recentSearchesRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recentSearchesTextView" />
+
+            <Button
+                android:id="@+id/clearButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/antqua_bold"
+                android:text="clear"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recentSearchesRecyclerView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
 </layout>

@@ -21,13 +21,15 @@ import com.example.qnews.ui.recycler.listeners.OnRecyclerClickListener
 import com.example.qnews.ui.recycler.adapters.SuggestionAdapter
 import com.example.qnews.ui.viewModel.SearchViewModelFactory
 import com.example.qnews.ui.viewModel.other.SearchViewModel
+import kotlinx.android.synthetic.main.toolbar_type2.view.*
 
 class SearchFragment : Fragment() {
 
-    private lateinit var binding:FragmentSearchBinding
+    private lateinit var binding: FragmentSearchBinding
 
     private val viewModel by lazy {
-        val factory = SearchViewModelFactory(NewsDatabase.getInstance(requireContext().applicationContext).newsDao)
+        val factory =
+            SearchViewModelFactory(NewsDatabase.getInstance(requireContext().applicationContext).newsDao)
         ViewModelProvider(this, factory).get(SearchViewModel::class.java)
     }
 
@@ -42,12 +44,34 @@ class SearchFragment : Fragment() {
             false
         )
 
-        binding.imageViewLoop.setOnClickListener {
-            val topic = binding.editTextSearch.text.toString()
-            if (topic.isNotEmpty()) {
-                findAndInsert(topic)
-            } else {
-                Toast.makeText(requireContext(), getString(R.string.field_is_empty), Toast.LENGTH_SHORT).show()
+//        binding.imageViewLoop.setOnClickListener {
+//            val topic = binding.editTextSearch.text.toString()
+//            if (topic.isNotEmpty()) {
+//                findAndInsert(topic)
+//            } else {
+//                Toast.makeText(requireContext(), getString(R.string.field_is_empty), Toast.LENGTH_SHORT).show()
+//            }
+//        }
+
+        with(binding.toolbar2) {
+            imageVIewGetBack.setOnClickListener {
+                val imm: InputMethodManager =
+                    requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(requireView().windowToken, 0)
+                findNavController().navigateUp()
+            }
+
+            imageViewstartSearching.setOnClickListener {
+                val topic = editTextSearchNewsAndArticles.text.toString()
+                if (topic.isNotEmpty()) {
+                    findAndInsert(topic)
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.field_is_empty),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
 
@@ -100,6 +124,8 @@ class SearchFragment : Fragment() {
             else
                 View.INVISIBLE
         }
+
+        getRecentSearches()
 
         return binding.root
     }

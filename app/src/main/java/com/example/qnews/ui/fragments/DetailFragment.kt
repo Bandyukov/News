@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.qnews.R
 import com.example.qnews.databinding.FragmentDetailBinding
 import com.example.qnews.ui.viewModel.other.MainViewModel
@@ -28,6 +30,14 @@ class DetailFragment : Fragment() {
 
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        with(binding.toolbar3) {
+            imageVIewGetBack.setOnClickListener {
+                it.findNavController().navigateUp()
+            }
+
+            textViewSearchedTitle.visibility = View.GONE
+        }
+
         binding.lifecycleOwner = this
 
         val bundle: Bundle? = this.arguments
@@ -38,7 +48,10 @@ class DetailFragment : Fragment() {
 
             viewModel.news.observe(viewLifecycleOwner) {
                 with(binding) {
-                    Glide.with(imageViewNewsPoster.context).load(it.urlToImage).into(imageViewNewsPoster)
+                    Glide.with(imageViewNewsPoster.context)
+                        .load(it.urlToImage)
+                        .transition(withCrossFade())
+                        .into(imageViewNewsPoster)
                     textViewNewsTitle.text = it.title
                     textViewDescription.text = it.description
                     textViewSourceAndDate.text = String.format(
@@ -50,37 +63,12 @@ class DetailFragment : Fragment() {
                     textViewContent.text = it.content
                     textViewUrlToSource.text = it.url
 
-                    val ch: CharSequence = it.author as CharSequence
-                    chip.text = ch
                 }
-
-//                Glide.with(binding.imageViewNewsPoster.context).load(it.urlToImage).into(binding.imageViewNewsPoster)
-//                binding.textViewNewsTitle.text = it.title
-//                binding.textViewDescription.text = it.description
-//                binding.textViewSourceAndDate.text = String.format(
-//                    getString(R.string.source_date),
-//                    it.name,
-//                    it.publishedAt
-//                )
-//                binding.textViewAuthor.text = it.author
-//                binding.textViewContent.text = it.content
-//                binding.textViewUrlToSource.text = it.url
-//
-//                val ch: CharSequence = it.author as CharSequence
-//                binding.chip.text = ch
-
-                val a = DrawableBuilder()
-                    .rectangle()
-                    .rounded()
-                    .solidColor(resources.getColor(R.color.dark_red))
-                    .solidColorPressed(resources.getColor(R.color.white))
-                    .build()
-                //Log.i("qwe", a.toString())
-                //Glide.with(binding.myImageView.context).load(a).into(binding.myImageView)
 
                 binding.executePendingBindings()
             }
         }
+
 
         return binding.root
     }

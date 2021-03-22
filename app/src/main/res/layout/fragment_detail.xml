@@ -3,119 +3,126 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/toolbarId"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="?attr/actionBarSize"-->
-<!--        app:navigationIcon="?attr/homeAsUpIndicator"/>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <ScrollView
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
-
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:context=".ui.fragments.DetailFragment">
+            android:elevation="0dp"
+            android:fitsSystemWindows="true">
 
-            <ImageView
-                android:id="@+id/imageViewNewsPoster"
+            <com.example.qnews.ui.toolbar.Toolbar3
+                android:id="@+id/toolbar3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/news_picture" />
+                android:orientation="vertical"
+                tools:context=".ui.fragments.DetailFragment">
 
-            <TextView
-                android:id="@+id/textViewNewsTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:fontFamily="@font/antqua_bold"
-                android:textSize="25sp" />
+                <ImageView
+                    android:id="@+id/imageViewNewsPoster"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/news_picture" />
 
-            <TextView
-                android:id="@+id/textViewDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:fontFamily="@font/antqua_casual"
-                android:textSize="21sp" />
+                <TextView
+                    android:id="@+id/textViewNewsTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:fontFamily="@font/antqua_bold"
+                    android:textSize="25sp" />
 
-            <TextView
-                android:id="@+id/textViewSourceAndDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:fontFamily="@font/antqua_italic"
-                android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/textViewDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:fontFamily="@font/antqua_casual"
+                    android:textSize="21sp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_marginTop="6dp"
-                android:background="@color/orange"/>
+                <TextView
+                    android:id="@+id/textViewSourceAndDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:fontFamily="@font/antqua_italic"
+                    android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/textViewAuthor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="6dp"
-                android:layout_marginBottom="6dp"
-                android:fontFamily="@font/antqua_bold"
-                android:textSize="18sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@color/orange" />
 
-            <TextView
-                android:id="@+id/textViewContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:fontFamily="@font/antqua_casual"
-                android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/textViewAuthor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:fontFamily="@font/antqua_bold"
+                    android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/textViewUrlToSource"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:fontFamily="@font/antqua_casual"
-                android:textSize="15sp"
-                android:autoLink="web"/>
+                <TextView
+                    android:id="@+id/textViewContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:fontFamily="@font/antqua_casual"
+                    android:textSize="18sp" />
 
-            <com.github.okdroid.checkablechipview.CheckableChipView
-                android:id="@+id/chip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:color="@color/red"/>
-
-
-<!--            <RelativeLayout android:layout_height="wrap_content"-->
-<!--                android:layout_width="wrap_content">-->
-<!--                <ImageView-->
-<!--                    android:id="@+id/myImageView"-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="25dp" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/myImageViewText"-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="25dp"-->
-<!--                    android:layout_alignLeft="@+id/myImageView"-->
-<!--                    android:layout_alignTop="@+id/myImageView"-->
-<!--                    android:layout_alignRight="@+id/myImageView"-->
-<!--                    android:layout_alignBottom="@+id/myImageView"-->
-<!--                    android:layout_margin="1dp"-->
-<!--                    android:gravity="center"-->
-<!--                    android:textSize="20sp"-->
-<!--                    android:text="Hello"-->
-<!--                    android:textColor="#000000" />-->
-<!--            </RelativeLayout>-->
+                <TextView
+                    android:id="@+id/textViewUrlToSource"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:autoLink="web"
+                    android:fontFamily="@font/antqua_casual"
+                    android:textSize="15sp" />
 
 
-        </LinearLayout>
-    </ScrollView>
+                <!--            <RelativeLayout android:layout_height="wrap_content"-->
+                <!--                android:layout_width="wrap_content">-->
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/myImageView"-->
+                <!--                    android:layout_width="50dp"-->
+                <!--                    android:layout_height="25dp" />-->
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/myImageViewText"-->
+                <!--                    android:layout_width="50dp"-->
+                <!--                    android:layout_height="25dp"-->
+                <!--                    android:layout_alignLeft="@+id/myImageView"-->
+                <!--                    android:layout_alignTop="@+id/myImageView"-->
+                <!--                    android:layout_alignRight="@+id/myImageView"-->
+                <!--                    android:layout_alignBottom="@+id/myImageView"-->
+                <!--                    android:layout_margin="1dp"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:textSize="20sp"-->
+                <!--                    android:text="Hello"-->
+                <!--                    android:textColor="#000000" />-->
+                <!--            </RelativeLayout>-->
+
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 </layout>
 
