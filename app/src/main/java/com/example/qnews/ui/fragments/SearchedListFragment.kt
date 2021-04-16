@@ -12,13 +12,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.qnews.R
+import com.example.qnews.core.NewsApi
+import com.example.qnews.core.db.NewsDatabase
 import com.example.qnews.core.models.key.Key
+import com.example.qnews.core.repo.MainRepository
 import com.example.qnews.databinding.FragmentSearchedListBinding
 import com.example.qnews.ui.base.NewsDelegates
 import com.example.qnews.ui.base.NewsListScreenAdapter
 import com.example.qnews.ui.base.viewBinding
 import com.example.qnews.ui.recycler.listeners.OnRecyclerClickListener
+import com.example.qnews.ui.viewModel.factories.TopicViewModelFactory
 import com.example.qnews.ui.viewModel.other.MainViewModel
+import com.example.qnews.ui.viewModel.other.TopicViewModel
 
 
 class SearchedListFragment : Fragment(R.layout.fragment_searched_list) {
@@ -27,11 +32,17 @@ class SearchedListFragment : Fragment(R.layout.fragment_searched_list) {
 
     private val adapterNews = NewsListScreenAdapter()
 
+    private val viewModel by lazy {
+        val dao = NewsDatabase.getInstance(requireContext().applicationContext).newsDao
+        val repo = MainRepository(NewsApi.NewsApiService, dao)
+        val factory = TopicViewModelFactory(repo)
+        ViewModelProvider(this, factory).get(TopicViewModel::class.java)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val bundle: Bundle? = this.arguments
-        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         binding.recyclerViewNews.adapter = adapterNews
         bundle?.let {
@@ -58,9 +69,9 @@ class SearchedListFragment : Fragment(R.layout.fragment_searched_list) {
 
         NewsDelegates.setOnRecyclerClickListener(object : OnRecyclerClickListener {
             override fun onClick(position: Int) {
-                val id = viewModel.listOFNews.value!![position].uniqueId
+                val news = viewModel.listOFNews.value!![position]
                 val bundle1 = Bundle()
-                bundle1.putInt("id", id)
+                bundle1.putParcelable("news", news)
                 findNavController().navigate(R.id.action_searchedListFragment_to_detailFragment, bundle1)
             }
         })

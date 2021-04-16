@@ -19,7 +19,8 @@ class MainRepository(
         const val apiKey = "1855f8b714864e30be7a1e57b5d8855b"
     }
 
-    suspend fun getNewsFromNet() {
+    // API
+    suspend fun getNewsFromNetAndCache() {
         try {
             val requestVO = internetSource.getNewsFromNet("top-headlines", "us", 50, apiKey)
             cache(requestVO)
@@ -28,13 +29,22 @@ class MainRepository(
         }
     }
 
-    suspend fun getNewsFromNetByTopic(topic: String) {
-         try {
-             val requestVO = internetSource.getNewsFromNetByTopic("everything", topic, apiKey)
-             cache(requestVO)
-         } catch (ex: Exception) {
-             return
-         }
+    suspend fun getNewsFromNet() : List<News>? {
+        return try {
+            val requestVO = internetSource.getNewsFromNet("top-headlines", "us", 50, apiKey)
+            requestVO.articles.map { it.toNews() }
+        } catch (ex: Exception) {
+            null
+        }
+    }
+
+    suspend fun getNewsFromNetByTopic(topic: String) : List<News>? {
+        return try {
+            val requestVO = internetSource.getNewsFromNetByTopic("everything", topic, apiKey)
+            requestVO.articles.map { it.toNews() }
+        } catch (ex: Exception) {
+            null
+        }
     }
 
     private suspend fun cache(requestVO: NewsRequestVO) {
@@ -47,6 +57,7 @@ class MainRepository(
     }
 
 
+    // Room
     suspend fun getAllNewsFromDB() : List<News> = localSource.getAllNews().map { it.toNews() }
 
     suspend fun getCurrentNewsFromDB(newsId: Int) : News = localSource.getCurrentNews(newsId).toNews()

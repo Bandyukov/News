@@ -11,24 +11,30 @@ import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.qnews.R
+import com.example.qnews.core.NewsApi
+import com.example.qnews.core.db.NewsDatabase
+import com.example.qnews.core.models.news.News
+import com.example.qnews.core.repo.MainRepository
 import com.example.qnews.databinding.FragmentDetailBinding
+import com.example.qnews.ui.base.viewBinding
+import com.example.qnews.ui.viewModel.factories.MainViewModelFactory
 import com.example.qnews.ui.viewModel.other.MainViewModel
 import top.defaults.drawabletoolbox.DrawableBuilder
 
-class DetailFragment : Fragment() {
+class DetailFragment : Fragment(R.layout.fragment_detail) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val binding = DataBindingUtil.inflate<FragmentDetailBinding>(
-            inflater,
-            R.layout.fragment_detail,
-            container,
-            false
-        )
+    private val binding: FragmentDetailBinding by viewBinding { FragmentDetailBinding.bind(it) }
 
-        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+//    private val viewModel by lazy {
+//        val dao = NewsDatabase.getInstance(requireContext().applicationContext).newsDao
+//        val repo = MainRepository(NewsApi.NewsApiService, dao)
+//        val factory = MainViewModelFactory(repo)
+//        ViewModelProvider(this, factory).get(MainViewModel::class.java)
+//    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         with(binding.toolbar3) {
             imageVIewGetBack.setOnClickListener {
@@ -43,35 +49,29 @@ class DetailFragment : Fragment() {
         val bundle: Bundle? = this.arguments
 
         bundle?.let { bun ->
-            val id = bun.getInt("id")
-            viewModel.getNews(id)
+            val news = bun.getParcelable<News>("news")
 
-            viewModel.news.observe(viewLifecycleOwner) {
+            if (news != null)
                 with(binding) {
                     Glide.with(imageViewNewsPoster.context)
-                        .load(it.urlToImage)
+                        .load(news.urlToImage)
                         .transition(withCrossFade())
                         .into(imageViewNewsPoster)
-                    textViewNewsTitle.text = it.title
-                    textViewDescription.text = it.description
+
+                    textViewNewsTitle.text = news.title
+                    textViewDescription.text = news.description
                     textViewSourceAndDate.text = String.format(
                         getString(R.string.source_date),
-                        it.name,
-                        it.publishedAt
+                        news.name,
+                        news.publishedAt
                     )
-                    textViewAuthor.text = it.author
-                    textViewContent.text = it.content
-                    textViewUrlToSource.text = it.url
+                    textViewAuthor.text = news.author
+                    textViewContent.text = news.content
+                    textViewUrlToSource.text = news.url
 
+                    executePendingBindings()
                 }
 
-                binding.executePendingBindings()
-            }
         }
-
-
-        return binding.root
     }
-
-
 }

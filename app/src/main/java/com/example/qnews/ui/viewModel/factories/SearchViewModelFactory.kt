@@ -1,4 +1,4 @@
-package com.example.qnews.ui.viewModel
+package com.example.qnews.ui.viewModel.factories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

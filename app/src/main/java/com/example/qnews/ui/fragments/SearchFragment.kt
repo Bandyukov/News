@@ -17,15 +17,16 @@ import com.example.qnews.R
 import com.example.qnews.core.db.NewsDatabase
 import com.example.qnews.core.models.key.Key
 import com.example.qnews.databinding.FragmentSearchBinding
+import com.example.qnews.ui.base.viewBinding
 import com.example.qnews.ui.recycler.listeners.OnRecyclerClickListener
 import com.example.qnews.ui.recycler.adapters.SuggestionAdapter
-import com.example.qnews.ui.viewModel.SearchViewModelFactory
+import com.example.qnews.ui.viewModel.factories.SearchViewModelFactory
 import com.example.qnews.ui.viewModel.other.SearchViewModel
 import kotlinx.android.synthetic.main.toolbar_type2.view.*
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(R.layout.fragment_search) {
 
-    private lateinit var binding: FragmentSearchBinding
+    private val binding: FragmentSearchBinding by viewBinding { FragmentSearchBinding.bind(it) }
 
     private val viewModel by lazy {
         val factory =
@@ -33,25 +34,8 @@ class SearchFragment : Fragment() {
         ViewModelProvider(this, factory).get(SearchViewModel::class.java)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_search,
-            container,
-            false
-        )
-
-//        binding.imageViewLoop.setOnClickListener {
-//            val topic = binding.editTextSearch.text.toString()
-//            if (topic.isNotEmpty()) {
-//                findAndInsert(topic)
-//            } else {
-//                Toast.makeText(requireContext(), getString(R.string.field_is_empty), Toast.LENGTH_SHORT).show()
-//            }
-//        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         with(binding.toolbar2) {
             imageVIewGetBack.setOnClickListener {
@@ -126,8 +110,6 @@ class SearchFragment : Fragment() {
         }
 
         getRecentSearches()
-
-        return binding.root
     }
 
     private fun getRecentSearches() {
