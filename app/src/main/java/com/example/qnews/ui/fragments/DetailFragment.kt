@@ -13,6 +13,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withC
 import com.example.qnews.R
 import com.example.qnews.core.NewsApi
 import com.example.qnews.core.db.NewsDatabase
+import com.example.qnews.core.mapping.DateConverter
 import com.example.qnews.core.models.news.News
 import com.example.qnews.core.repo.MainRepository
 import com.example.qnews.databinding.FragmentDetailBinding
@@ -60,11 +61,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
                     textViewNewsTitle.text = news.title
                     textViewDescription.text = news.description
-                    textViewSourceAndDate.text = String.format(
-                        getString(R.string.source_date),
-                        news.name,
-                        news.publishedAt
-                    )
+                    textViewSource.text = news.name
+                    textViewDate.text = DateConverter.convert(news.publishedAt)
                     textViewAuthor.text = news.author
                     textViewContent.text = news.content
                     textViewUrlToSource.text = news.url

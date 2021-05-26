@@ -2,7 +2,9 @@ package com.example.qnews.core.mapping
 
 import com.example.qnews.core.models.news.News
 import com.example.qnews.core.db.entities.NewsDB
+import com.example.qnews.core.db.entities.SearchDB
 import com.example.qnews.core.models.news.NewsVO
+import com.example.qnews.core.models.suggestion.Search
 
 
 fun NewsVO.toNews(): News =
@@ -16,5 +18,13 @@ fun NewsDB.toNews(): News =
 
 fun News.toNewsDB(): NewsDB =
     NewsDB(id, name, author, title, description, url, urlToImage, publishedAt, content, uniqueId)
+
+fun SearchDB.toSearch() : Search = Search(search)
+
+fun Search.toSearchDB() : SearchDB = SearchDB(suggestion)
+
+fun String.toSearch() : Search = Search(this)
+
+fun Array<String>.toSearches() : List<Search> = this.map { it.toSearch() }
 
 

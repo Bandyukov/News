@@ -1,9 +1,6 @@
 package com.example.qnews.core.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.qnews.core.db.entities.NewsDB
 import com.example.qnews.core.db.entities.SearchDB
 
@@ -31,4 +28,7 @@ interface NewsDAO {
 
     @Query("DELETE FROM recent_search_table")
     suspend fun deleteAllRecentSearch()
+
+    @Delete
+    suspend fun deleteSearch(searchDB: SearchDB)
 }

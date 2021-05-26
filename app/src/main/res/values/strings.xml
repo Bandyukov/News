@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Qnews</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="news_picture">news picture</string>
     <string name="source_date">%s / %s</string>
@@ -14,4 +13,22 @@
     <string name="recent_searches">Recent searches</string>
     <string name="main_icon">main_icon</string>
     <string name="get_back">get back</string>
+    <string-array name="headlines">
+        <item>Covid19</item>
+        <item>Cryptocurrency</item>
+        <item>War</item>
+        <item>Climate</item>
+        <item>BLM</item>
+        <item>LGBT</item>
+        <item>Games</item>
+    </string-array>
+    <string-array name="world">
+        <item>Europe</item>
+        <item>USA</item>
+        <item>Russia</item>
+        <item>China</item>
+        <item>Asia</item>
+        <item>Australia</item>
+        <item>Africa</item>
+    </string-array>
 </resources>

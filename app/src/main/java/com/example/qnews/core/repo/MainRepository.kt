@@ -1,12 +1,17 @@
 package com.example.qnews.core.repo
 
+import android.util.Log
 import com.example.qnews.core.models.news.News
 import com.example.qnews.core.NewsApiService
 import com.example.qnews.core.models.news.NewsVO
 import com.example.qnews.core.db.NewsDAO
+import com.example.qnews.core.db.entities.SearchDB
 import com.example.qnews.core.mapping.toNews
 import com.example.qnews.core.mapping.toNewsDB
+import com.example.qnews.core.mapping.toSearch
+import com.example.qnews.core.mapping.toSearchDB
 import com.example.qnews.core.models.news.NewsRequestVO
+import com.example.qnews.core.models.suggestion.Search
 import java.lang.Exception
 
 class MainRepository(
@@ -65,4 +70,13 @@ class MainRepository(
     private suspend fun updateDatabase(articles: List<NewsVO>) = localSource.insertNews(articles.map { it.toNewsDB() })
 
     private suspend fun clearDatabase() = localSource.deleteAllNews()
+
+
+    suspend fun getAllRecentSearches() : List<Search> = localSource.getAllRecentSearch().map { it.toSearch() }
+
+    suspend fun updateSearches(search: Search) = localSource.insertSearch(search.toSearchDB())
+
+    suspend fun deleteSearch(search: Search) = localSource.deleteSearch(search.toSearchDB())
+
+    suspend fun clearSearches() = localSource.deleteAllRecentSearch()
 }

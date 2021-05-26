@@ -34,6 +34,7 @@ class MainViewModel(private val repository: MainRepository) : BaseViewModel() {
                 Log.i("asd", "we get respond and set to view model. size is ${listOFNews.value!!.size}")
             else
                 Log.i("asd", "NUll")
+
         }
 
     }

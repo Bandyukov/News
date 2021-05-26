@@ -1,71 +1,43 @@
 package com.example.qnews.ui.viewModel.other
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.qnews.core.db.NewsDAO
-import com.example.qnews.core.db.entities.SearchDB
-import com.example.qnews.ui.viewModel.base.BaseViewModel
+import com.example.qnews.core.models.suggestion.Search
+import com.example.qnews.core.repo.MainRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SearchViewModel(private val dao: NewsDAO) : BaseViewModel() {
+class SearchViewModel(private val repository: MainRepository) : ViewModel() {
 
-    private val _suggestionsHeadlines = MutableLiveData<List<String>>()
-    val suggestionsHeadlines: LiveData<List<String>> get() = _suggestionsHeadlines
-
-    private val _suggestionsWorld = MutableLiveData<List<String>>()
-    val suggestionsWorld: LiveData<List<String>> get() = _suggestionsWorld
-
-    private val _userSearches = MutableLiveData<List<String>>()
-    val userSearches: LiveData<List<String>> get() = _userSearches
+    private val _latestSearches = MutableLiveData<List<Search>>()
+    val latestSearches : LiveData<List<Search>> get() = _latestSearches
 
     init {
-
-        _suggestionsHeadlines.postValue(
-            listOf(
-                "Covid19",
-                "Coronavirus",
-                "Cryptocurrency",
-                "Climate",
-                "BLM",
-                "LGBT",
-                "Games"
-            )
-        )
-
-        _suggestionsWorld.postValue(
-            listOf(
-                "Europe",
-                "USA",
-                "Russia",
-                "China",
-                "Asia",
-                "Australia"
-            )
-        )
-
-        getAllRecentSearches()
+        getRecentSearches()
     }
 
-
-    fun getAllRecentSearches() {
+    private fun getRecentSearches() {
         viewModelScope.launch(Dispatchers.IO) {
-            _userSearches.postValue(dao.getAllRecentSearch().map { it.toString() })
+            _latestSearches.postValue(repository.getAllRecentSearches())
         }
     }
 
-    fun insertRecentSearch(search: String) {
+    fun updateRecentSearches(topic: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            dao.insertSearch(SearchDB(search))
+            var flag = false
+
+            latestSearches.value?.let { ls ->
+                for (search in ls) {
+                    if (search.suggestion == topic) {
+                        flag = true
+                        repository.deleteSearch(search)
+                    }
+                }
+            }
+            repository.updateSearches(Search(topic))
         }
     }
-
-    fun clearRecentSearches() {
-        viewModelScope.launch(Dispatchers.IO) {
-            dao.deleteAllRecentSearch()
-            getAllRecentSearches()
-        }
-    }
-
 }
