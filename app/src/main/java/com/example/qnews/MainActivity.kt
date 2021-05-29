@@ -8,9 +8,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val bar = supportActionBar
-        bar?.setIcon(android.R.drawable.arrow_up_float)
     }
 
     override fun onSupportNavigateUp(): Boolean {

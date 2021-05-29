@@ -8,5 +8,11 @@ data class Search(
     override val itemId: Long
         get() = suggestion.hashCode().toLong()
 
+    var key: Int = 0
+
+    constructor(suggestion: String, key: Int) : this(suggestion) {
+        this.key = key
+    }
+
     override fun toString(): String = suggestion
 }

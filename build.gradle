@@ -28,7 +28,7 @@ buildscript {
         checkable_chip_view = "2.0.0"
         drawable_toobox = "1.0.7"
         adapterDelegates = "4.3.0"
-
+        swipe_to_refresh_layout_version = "1.1.0"
     }
 
     dependencies {

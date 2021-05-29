@@ -15,11 +15,7 @@ class SearchViewModel(private val repository: MainRepository) : ViewModel() {
     private val _latestSearches = MutableLiveData<List<Search>>()
     val latestSearches : LiveData<List<Search>> get() = _latestSearches
 
-    init {
-        getRecentSearches()
-    }
-
-    private fun getRecentSearches() {
+    fun getRecentSearches() {
         viewModelScope.launch(Dispatchers.IO) {
             _latestSearches.postValue(repository.getAllRecentSearches())
         }

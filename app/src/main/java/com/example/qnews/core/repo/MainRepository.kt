@@ -55,7 +55,6 @@ class MainRepository(
     private suspend fun cache(requestVO: NewsRequestVO) {
         clearDatabase()
 
-        val result = requestVO.results
         val articles = requestVO.articles
 
         updateDatabase(articles)

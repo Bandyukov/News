@@ -11,16 +11,10 @@ import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.qnews.R
-import com.example.qnews.core.NewsApi
-import com.example.qnews.core.db.NewsDatabase
 import com.example.qnews.core.mapping.DateConverter
 import com.example.qnews.core.models.news.News
-import com.example.qnews.core.repo.MainRepository
 import com.example.qnews.databinding.FragmentDetailBinding
 import com.example.qnews.ui.base.viewBinding
-import com.example.qnews.ui.viewModel.factories.MainViewModelFactory
-import com.example.qnews.ui.viewModel.other.MainViewModel
-import top.defaults.drawabletoolbox.DrawableBuilder
 
 class DetailFragment : Fragment(R.layout.fragment_detail) {
 
@@ -69,7 +63,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
                     executePendingBindings()
                 }
-
         }
     }
 }

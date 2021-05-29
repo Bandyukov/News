@@ -18,12 +18,6 @@ class MainViewModel(private val repository: MainRepository) : BaseViewModel() {
     private val _news_ = MutableLiveData<News>()
     val news : LiveData<News> get() = _news_
 
-
-
-    init {
-
-    }
-
     fun getAllNews() {
         uiScope.launch {
             repository.getNewsFromNetAndCache()
@@ -35,6 +29,7 @@ class MainViewModel(private val repository: MainRepository) : BaseViewModel() {
             else
                 Log.i("asd", "NUll")
 
+            //repository.clearSearches()
         }
 
     }

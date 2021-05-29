@@ -2,6 +2,7 @@ package com.example.qnews.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -44,6 +45,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.getRecentSearches()
+
         binding.recyclerView.adapter = adapter
 
         val headlines = resources.getStringArray(R.array.headlines)
@@ -83,8 +86,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         NewsDelegates.setOnSuggestionClickListener(object : OnSuggestionClickListener {
             override fun onSuggestionClick(search: Search) {
-                Snackbar.make(binding.root, search.toString(), Snackbar.LENGTH_SHORT).show()
-
+                find(search.toString())
             }
         })
     }
@@ -97,6 +99,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(requireView().windowToken, 0)
         findNavController().navigate(R.id.action_searchFragment_to_searchedListFragment, bundle)
+        binding.toolbar2.editTextSeaechNewsAndAtricles.setText(topic)
     }
 
 }

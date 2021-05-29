@@ -49,13 +49,24 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             }
         })
 
-        binding.toolbar1.imageViewLoop.setOnClickListener {
-            findNavController().navigate(R.id.action_listFragment_to_searchFragment)
+        with(binding) {
+            toolbar1.imageViewLoop.setOnClickListener {
+                findNavController().navigate(R.id.action_listFragment_to_searchFragment)
+            }
+
+            refreshLayout.setOnRefreshListener {
+                refreshLayout.isRefreshing = true
+                viewModel.getAllNews()
+                refreshLayout.isRefreshing = false
+            }
         }
 
         viewModel.listOFNews.observe(viewLifecycleOwner) {
             if (it != null) {
                 newsAdapter.items = it
+                binding.refreshLayout.isRefreshing = false
+            } else {
+                binding.refreshLayout.isRefreshing = true
             }
         }
 

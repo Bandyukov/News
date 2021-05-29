@@ -18,6 +18,10 @@ data class SearchDB(
     @PrimaryKey(autoGenerate = true)
     var key: Int = 0
 
+    constructor(search: String, key: Int) : this(search) {
+        this.key = key
+    }
+
     override fun toString(): String = search
 
     override val itemId: Long

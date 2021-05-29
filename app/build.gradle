@@ -57,6 +57,8 @@ dependencies {
     // Room and Lifecycle dependencies
     implementation "androidx.room:room-runtime:$room_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.wear:wear:1.0.0'
+    compileOnly 'com.google.android.wearable:wearable:2.6.0'
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 
@@ -102,9 +104,7 @@ dependencies {
     implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$adapterDelegates"
 
 
-    //Checkable chip view
-    implementation "com.github.okdroid:checkablechipview:$checkable_chip_view"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipe_to_refresh_layout_version"
 
-    //Drawable Toolbox
-    implementation "com.github.duanhong169:drawabletoolbox:$drawable_toobox"
+
 }

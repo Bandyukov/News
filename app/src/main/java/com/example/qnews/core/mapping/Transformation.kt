@@ -19,9 +19,9 @@ fun NewsDB.toNews(): News =
 fun News.toNewsDB(): NewsDB =
     NewsDB(id, name, author, title, description, url, urlToImage, publishedAt, content, uniqueId)
 
-fun SearchDB.toSearch() : Search = Search(search)
+fun SearchDB.toSearch() : Search = Search(search, key)
 
-fun Search.toSearchDB() : SearchDB = SearchDB(suggestion)
+fun Search.toSearchDB() : SearchDB = SearchDB(suggestion, key)
 
 fun String.toSearch() : Search = Search(this)
 
