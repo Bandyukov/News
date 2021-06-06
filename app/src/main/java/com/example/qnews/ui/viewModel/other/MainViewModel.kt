@@ -1,6 +1,5 @@
 package com.example.qnews.ui.viewModel.other
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.qnews.core.models.news.News
@@ -18,33 +17,8 @@ class MainViewModel(private val repository: MainRepository) : BaseViewModel() {
             repository.getNewsFromNetAndCache()
             val result = repository.getAllNewsFromDB()
             _listOfNews_.postValue(result)
-
-            if (listOFNews.value != null)
-                Log.i("asd", "we get respond and set to view model. size is ${listOFNews.value!!.size}")
-            else
-                Log.i("asd", "NUll")
-
-            //repository.clearSearches()
         }
 
     }
 
-    fun getNews(id: Int) {
-        uiScope.launch {
-            val thisNews = repository.getCurrentNewsFromDB(id)
-            _news_.postValue(thisNews)
-        }
-    }
-
-
-
-    fun getDB() {
-        uiScope.launch {
-            _listOfNews_.postValue(repository.getAllNewsFromDB())
-            if (listOFNews.value != null)
-                Log.i("asd", "we get respond and set to view model. size is ${listOFNews.value!!.size}!!!!!")
-            else
-                Log.i("asd", "NUll")
-        }
-    }
 }
