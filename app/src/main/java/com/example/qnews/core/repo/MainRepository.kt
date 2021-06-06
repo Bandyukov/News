@@ -1,18 +1,15 @@
 package com.example.qnews.core.repo
 
-import android.util.Log
-import com.example.qnews.core.models.news.News
 import com.example.qnews.core.NewsApiService
-import com.example.qnews.core.models.news.NewsVO
 import com.example.qnews.core.db.NewsDAO
-import com.example.qnews.core.db.entities.SearchDB
 import com.example.qnews.core.mapping.toNews
 import com.example.qnews.core.mapping.toNewsDB
 import com.example.qnews.core.mapping.toSearch
 import com.example.qnews.core.mapping.toSearchDB
+import com.example.qnews.core.models.news.News
 import com.example.qnews.core.models.news.NewsRequestVO
+import com.example.qnews.core.models.news.NewsVO
 import com.example.qnews.core.models.suggestion.Search
-import java.lang.Exception
 
 class MainRepository(
     private val internetSource: NewsApiService,

@@ -1,7 +1,6 @@
 package com.example.qnews.core.mapping
 
 import android.annotation.SuppressLint
-import android.util.Log
 import com.example.qnews.core.models.key.Key
 import java.text.SimpleDateFormat
 import java.util.*

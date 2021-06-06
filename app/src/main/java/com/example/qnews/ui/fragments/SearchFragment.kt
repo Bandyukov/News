@@ -2,17 +2,14 @@ package com.example.qnews.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.qnews.R
 import com.example.qnews.core.NewsApi
-import com.example.qnews.core.NewsApiService
 import com.example.qnews.core.db.NewsDatabase
 import com.example.qnews.core.mapping.toSearches
 import com.example.qnews.core.models.base.ListItem
@@ -21,19 +18,18 @@ import com.example.qnews.core.models.suggestion.Search
 import com.example.qnews.core.models.suggestion.SuggestionHorizontalItem
 import com.example.qnews.core.repo.MainRepository
 import com.example.qnews.databinding.FragmentSearchBinding
-import com.example.qnews.ui.base.NewsDelegates
-import com.example.qnews.ui.base.SuggestionHorizontalAdapter
 import com.example.qnews.ui.base.viewBinding
+import com.example.qnews.ui.recycler.adapters.SuggestionHorizontalAdapter
 import com.example.qnews.ui.recycler.listeners.OnSuggestionClickListener
 import com.example.qnews.ui.viewModel.factories.SearchViewModelFactory
 import com.example.qnews.ui.viewModel.other.SearchViewModel
 import com.google.android.material.snackbar.Snackbar
 
-class SearchFragment : Fragment(R.layout.fragment_search) {
+class SearchFragment : Fragment(R.layout.fragment_search), OnSuggestionClickListener {
 
     private val binding: FragmentSearchBinding by viewBinding { FragmentSearchBinding.bind(it) }
 
-    private val adapter by lazy { SuggestionHorizontalAdapter() }
+    private val adapter by lazy { SuggestionHorizontalAdapter(this) }
 
     private val viewModel by lazy {
         val dao = NewsDatabase.getInstance(requireContext().applicationContext).newsDao
@@ -84,11 +80,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             adapter.items = suggestions
         }
 
-        NewsDelegates.setOnSuggestionClickListener(object : OnSuggestionClickListener {
-            override fun onSuggestionClick(search: Search) {
-                find(search.toString())
-            }
-        })
     }
 
     private fun find(topic: String) {
@@ -99,7 +90,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(requireView().windowToken, 0)
         findNavController().navigate(R.id.action_searchFragment_to_searchedListFragment, bundle)
-        binding.toolbar2.editTextSeaechNewsAndAtricles.setText(topic)
     }
 
+    override fun onSuggestionClick(search: Search) {
+        find(search.toString())
+    }
 }

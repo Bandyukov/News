@@ -11,17 +11,16 @@ import com.example.qnews.core.NewsApi
 import com.example.qnews.core.db.NewsDatabase
 import com.example.qnews.core.repo.MainRepository
 import com.example.qnews.databinding.FragmentListBinding
-import com.example.qnews.ui.base.NewsDelegates
-import com.example.qnews.ui.base.NewsListScreenAdapter
+import com.example.qnews.ui.recycler.adapters.NewsListScreenAdapter
 import com.example.qnews.ui.base.viewBinding
+import com.example.qnews.ui.recycler.listeners.OnNewsClickListener
 import com.example.qnews.ui.viewModel.other.MainViewModel
-import com.example.qnews.ui.recycler.listeners.OnRecyclerClickListener
 import com.example.qnews.ui.viewModel.factories.MainViewModelFactory
 
-class ListFragment : Fragment(R.layout.fragment_list) {
+class ListFragment : Fragment(R.layout.fragment_list), OnNewsClickListener {
     private val binding: FragmentListBinding by viewBinding { FragmentListBinding.bind(it) }
 
-    private val newsAdapter = NewsListScreenAdapter()
+    private val newsAdapter = NewsListScreenAdapter(this)
 
     private val viewModel by lazy {
         val dao = NewsDatabase.getInstance(requireContext().applicationContext).newsDao
@@ -39,15 +38,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
-
-        NewsDelegates.setOnRecyclerClickListener(object : OnRecyclerClickListener {
-            override fun onClick(position: Int) {
-                val news = viewModel.listOFNews.value!![position]
-                val bundle1 = Bundle()
-                bundle1.putParcelable("news", news)
-                findNavController().navigate(R.id.action_listFragment_to_detailFragment, bundle1)
-            }
-        })
 
         with(binding) {
             toolbar1.imageViewLoop.setOnClickListener {
@@ -76,5 +66,10 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         }
     }
 
-
+    override fun onNewsClick(position: Int) {
+        val news = viewModel.listOFNews.value!![position]
+        val bundle1 = Bundle()
+        bundle1.putParcelable("news", news)
+        findNavController().navigate(R.id.action_listFragment_to_detailFragment, bundle1)
+    }
 }

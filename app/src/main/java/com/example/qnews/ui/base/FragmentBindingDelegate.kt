@@ -36,7 +36,7 @@ class FragmentBindingDelegate<T : ViewBinding>(
 
             override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
                 if (event == Lifecycle.Event.ON_CREATE) {
-                    fragment.viewLifecycleOwnerLiveData.observe(fragment, Observer { lifecycleOwner ->
+                    fragment.viewLifecycleOwnerLiveData.observe(fragment, { lifecycleOwner ->
                         lifecycleOwner.lifecycle.addObserver(object : LifecycleEventObserver {
                             override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
                                 if (event == Lifecycle.Event.ON_DESTROY) {
