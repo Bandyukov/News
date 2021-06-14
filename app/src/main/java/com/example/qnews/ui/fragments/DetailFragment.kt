@@ -2,27 +2,24 @@ package com.example.qnews.ui.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+import com.bumptech.glide.request.RequestOptions
 import com.example.qnews.R
 import com.example.qnews.core.mapping.DateConverter
 import com.example.qnews.core.models.news.News
 import com.example.qnews.databinding.FragmentDetailBinding
 import com.example.qnews.ui.base.viewBinding
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class DetailFragment : Fragment(R.layout.fragment_detail) {
+class DetailFragment : DaggerFragment(R.layout.fragment_detail) {
 
     private val binding: FragmentDetailBinding by viewBinding { FragmentDetailBinding.bind(it) }
 
-//    private val viewModel by lazy {
-//        val dao = NewsDatabase.getInstance(requireContext().applicationContext).newsDao
-//        val repo = MainRepository(NewsApi.NewsApiService, dao)
-//        val factory = MainViewModelFactory(repo)
-//        ViewModelProvider(this, factory).get(MainViewModel::class.java)
-//    }
-
+    @Inject
+    lateinit var requestOptions: RequestOptions
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,6 +42,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             if (news != null)
                 with(binding) {
                     Glide.with(imageViewNewsPoster.context)
+                        .applyDefaultRequestOptions(requestOptions)
                         .load(news.urlToImage)
                         .transition(withCrossFade())
                         .into(imageViewNewsPoster)

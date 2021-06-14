@@ -2,7 +2,6 @@ package com.example.qnews.ui.base
 
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestOptions
 import com.example.qnews.R
@@ -31,12 +30,12 @@ object NewsDelegates {
                 with(binding) {
                     textViewTitle.text = item.title
                     textViewDate.text = DateConverter.convert(item.publishedAt)
-                    val options = RequestOptions()
+                    val requestOptions = RequestOptions()
                         .placeholder(R.drawable.loading_animation)
                         .error(R.drawable.connection_error_image)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                     Glide.with(imageViewPoster.context)
-                        .applyDefaultRequestOptions(options)
+                        .applyDefaultRequestOptions(requestOptions)
                         .load(item.urlToImage)
                         .transition(withCrossFade())
                         .into(imageViewPoster)

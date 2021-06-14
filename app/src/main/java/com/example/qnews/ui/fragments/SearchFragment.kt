@@ -4,39 +4,32 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.qnews.R
-import com.example.qnews.core.NewsApi
-import com.example.qnews.core.db.NewsDatabase
-import com.example.qnews.core.mapping.toSearches
-import com.example.qnews.core.models.base.ListItem
 import com.example.qnews.core.models.key.Key
 import com.example.qnews.core.models.suggestion.Search
-import com.example.qnews.core.models.suggestion.SuggestionHorizontalItem
-import com.example.qnews.core.repo.MainRepository
 import com.example.qnews.databinding.FragmentSearchBinding
 import com.example.qnews.ui.base.viewBinding
 import com.example.qnews.ui.recycler.adapters.SuggestionHorizontalAdapter
 import com.example.qnews.ui.recycler.listeners.OnSuggestionClickListener
-import com.example.qnews.ui.viewModel.factories.SearchViewModelFactory
+import com.example.qnews.ui.viewModel.factories.ViewModelProviderFactory
 import com.example.qnews.ui.viewModel.other.SearchViewModel
 import com.google.android.material.snackbar.Snackbar
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class SearchFragment : Fragment(R.layout.fragment_search), OnSuggestionClickListener {
+class SearchFragment : DaggerFragment(R.layout.fragment_search), OnSuggestionClickListener {
 
     private val binding: FragmentSearchBinding by viewBinding { FragmentSearchBinding.bind(it) }
 
     private val adapter by lazy { SuggestionHorizontalAdapter(this) }
 
-    private val viewModel by lazy {
-        val dao = NewsDatabase.getInstance(requireContext().applicationContext).newsDao
-        val repository = MainRepository(NewsApi.NewsApiService, dao)
-        val factory = SearchViewModelFactory(repository)
-        ViewModelProvider(this, factory).get(SearchViewModel::class.java)
-    }
+    @Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    private val viewModel by viewModels<SearchViewModel> { factory }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,9 +37,6 @@ class SearchFragment : Fragment(R.layout.fragment_search), OnSuggestionClickList
         viewModel.getRecentSearches()
 
         binding.recyclerView.adapter = adapter
-
-        val headlines = resources.getStringArray(R.array.headlines)
-        val world = resources.getStringArray(R.array.world)
 
         with(binding.toolbar2) {
 
@@ -64,20 +54,13 @@ class SearchFragment : Fragment(R.layout.fragment_search), OnSuggestionClickList
             }
 
             imageVIewGetBack.setOnClickListener {
+                hideKeyboard()
                 it.findNavController().navigateUp()
             }
         }
-        viewModel.latestSearches.observe(viewLifecycleOwner) {
-
-            val suggestions = mutableListOf<ListItem>(
-                SuggestionHorizontalItem(getString(R.string.headlines), headlines.toSearches()),
-                SuggestionHorizontalItem(getString(R.string.world), world.toSearches())
-            )
-
-            if (it.isNotEmpty())
-                suggestions.add(SuggestionHorizontalItem(getString(R.string.recent_searches), it))
-
-            adapter.items = suggestions
+        viewModel.topics.observe(viewLifecycleOwner) {
+            adapter.items = it
+            adapter.notifyDataSetChanged()
         }
 
     }
@@ -86,13 +69,19 @@ class SearchFragment : Fragment(R.layout.fragment_search), OnSuggestionClickList
         viewModel.updateRecentSearches(topic)
         val bundle = Bundle()
         bundle.putString(Key.TOPIC, topic)
+        hideKeyboard()
+        findNavController().navigate(R.id.action_searchFragment_to_searchedListFragment, bundle)
+    }
+
+    private fun hideKeyboard() {
         val imm: InputMethodManager =
             requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(requireView().windowToken, 0)
-        findNavController().navigate(R.id.action_searchFragment_to_searchedListFragment, bundle)
     }
 
     override fun onSuggestionClick(search: Search) {
         find(search.toString())
     }
+
+
 }

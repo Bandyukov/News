@@ -1,33 +1,30 @@
 package com.example.qnews.ui.fragments
 
 import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.qnews.R
-import com.example.qnews.core.NewsApi
-import com.example.qnews.core.db.NewsDatabase
-import com.example.qnews.core.repo.MainRepository
 import com.example.qnews.databinding.FragmentListBinding
-import com.example.qnews.ui.recycler.adapters.NewsListScreenAdapter
 import com.example.qnews.ui.base.viewBinding
+import com.example.qnews.ui.recycler.adapters.NewsListScreenAdapter
 import com.example.qnews.ui.recycler.listeners.OnNewsClickListener
+import com.example.qnews.ui.viewModel.factories.ViewModelProviderFactory
 import com.example.qnews.ui.viewModel.other.MainViewModel
-import com.example.qnews.ui.viewModel.factories.MainViewModelFactory
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class ListFragment : Fragment(R.layout.fragment_list), OnNewsClickListener {
+class ListFragment : DaggerFragment(R.layout.fragment_list), OnNewsClickListener {
+
     private val binding: FragmentListBinding by viewBinding { FragmentListBinding.bind(it) }
 
     private val newsAdapter = NewsListScreenAdapter(this)
 
-    private val viewModel by lazy {
-        val dao = NewsDatabase.getInstance(requireContext().applicationContext).newsDao
-        val repo = MainRepository(NewsApi.NewsApiService, dao)
-        val factory = MainViewModelFactory(repo)
-        ViewModelProvider(this, factory).get(MainViewModel::class.java)
-    }
+    @Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    val viewModel by viewModels<MainViewModel> { factory }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -64,6 +61,8 @@ class ListFragment : Fragment(R.layout.fragment_list), OnNewsClickListener {
             //if (bundle == null)
                 viewModel.getAllNews()
         }
+
+
     }
 
     override fun onNewsClick(position: Int) {

@@ -6,11 +6,14 @@ import com.example.qnews.core.models.news.News
 import com.example.qnews.core.repo.MainRepository
 import com.example.qnews.ui.viewModel.base.BaseViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(private val repository: MainRepository) : BaseViewModel() {
+class MainViewModel @Inject constructor(
+    private val repository: MainRepository
+) : BaseViewModel() {
 
     private val _news_ = MutableLiveData<News>()
-    val news : LiveData<News> get() = _news_
+    val news: LiveData<News> get() = _news_
 
     fun getAllNews() {
         uiScope.launch {
