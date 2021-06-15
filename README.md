@@ -15,7 +15,7 @@ Search Fragment
 
 <img src=https://github.com/Bandyukov/Test/blob/main/Camera%20Roll/2021-06-15%2011-19-00.JPG width=220/>
 
-Searhed list Fragment
+Detail Fragment
 
 <img src=https://github.com/Bandyukov/Test/blob/main/Camera%20Roll/2021-06-15%2011-19-16.JPG width=220/>
 
