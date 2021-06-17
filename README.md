@@ -1,5 +1,13 @@
 # Qnews
-The news application for reading most recent news by any topic.
+
+### Brief description
+
+- Built an Android Kotlin Application forreading most recent news by any topic.
+- Implemented MVVM Architecture, Retrofit2 for fetchicng data and Room forcaching
+- Adapter Delegate was used to make complex layout with RecyclerView
+
+
+
 
 ### There are all created screens
 
