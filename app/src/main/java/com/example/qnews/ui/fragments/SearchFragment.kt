@@ -40,8 +40,8 @@ class SearchFragment : DaggerFragment(R.layout.fragment_search), OnSuggestionCli
 
         with(binding.toolbar2) {
 
-            imageViewstartSearching.setOnClickListener {
-                val topic = binding.toolbar2.editTextSeaechNewsAndAtricles.text.toString()
+            imageViewStartSearching.setOnClickListener {
+                val topic = binding.toolbar2.editTextSearchNewsAndArticles.text.toString()
                 if (topic.isNotEmpty()) {
                     find(topic)
                 } else {
@@ -53,7 +53,7 @@ class SearchFragment : DaggerFragment(R.layout.fragment_search), OnSuggestionCli
                 }
             }
 
-            imageVIewGetBack.setOnClickListener {
+            imageViewGetBack.setOnClickListener {
                 hideKeyboard()
                 it.findNavController().navigateUp()
             }

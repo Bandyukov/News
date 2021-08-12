@@ -13,15 +13,14 @@ class Toolbar2 @JvmOverloads constructor(
     defStyleAttrs: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttrs) {
 
-    val imageViewstartSearching: ImageView
-    val imageVIewGetBack: ImageView
-    val editTextSeaechNewsAndAtricles: EditText
+    val imageViewStartSearching: ImageView
+    val imageViewGetBack: ImageView
+    val editTextSearchNewsAndArticles: EditText
 
     init {
         inflate(context, R.layout.toolbar_type2, this)
-
-        imageVIewGetBack = findViewById(R.id.imageViewGetBack)
-        imageViewstartSearching = findViewById(R.id.imageViewStartSearching)
-        editTextSeaechNewsAndAtricles = findViewById(R.id.editTextSearchNewsAndArticles)
+        imageViewGetBack = findViewById(R.id.imageViewGetBack)
+        imageViewStartSearching = findViewById(R.id.imageViewStartSearching)
+        editTextSearchNewsAndArticles = findViewById(R.id.editTextSearchNewsAndArticles)
     }
 }

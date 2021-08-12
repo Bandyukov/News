@@ -11,7 +11,7 @@ import kotlin.reflect.KProperty
 
 class FragmentBindingDelegate<T : ViewBinding>(
     val fragment: Fragment,
-    val bindingFactory: (View) -> T
+    private val bindingFactory: (View) -> T
 ) : ReadOnlyProperty<Fragment, T> {
 
     private var binding: T? = null

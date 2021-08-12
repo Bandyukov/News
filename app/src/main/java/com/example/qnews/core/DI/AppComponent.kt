@@ -1,6 +1,7 @@
 package com.example.qnews.core.DI
 
 import android.app.Application
+import android.content.Context
 import com.example.qnews.NewsApplication
 import com.example.qnews.core.DI.resources.ResourceProvider
 import com.example.qnews.core.DI.viewModel.ViewModelFactoryModule
@@ -9,6 +10,7 @@ import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
+
 
 @Component(
     modules = [

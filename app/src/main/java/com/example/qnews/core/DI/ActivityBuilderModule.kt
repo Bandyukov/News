@@ -12,13 +12,15 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityBuilderModule {
     @ContributesAndroidInjector
-    abstract fun contributeSplashActivity() : SplashActivity
+    abstract fun contributeSplashActivity(): SplashActivity
 
-    @ContributesAndroidInjector(modules = [
-        MainModule::class,
-        MainFragmentBuilder::class,
-        MainViewModelModule::class,
-    ])
+    @ContributesAndroidInjector(
+        modules = [
+            MainModule::class,
+            MainFragmentBuilder::class,
+            MainViewModelModule::class,
+        ]
+    )
     @MainScope
-    abstract fun contributeMainActivity() : MainActivity
+    abstract fun contributeMainActivity(): MainActivity
 }

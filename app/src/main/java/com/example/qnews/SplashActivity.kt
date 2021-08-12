@@ -19,8 +19,5 @@ class SplashActivity : DaggerAppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }
-
-
-
     }
 }
